@@ -1,0 +1,40 @@
+created:
+    - app/Http/Controllers/ArticleConfectionController.php
+    - app/Http/Controllers/ArticleVenteController.php
+    - app/Http/Controllers/CategorieController.php
+    - app/Http/Controllers/FournisseurController.php
+    - database/factories/ArticleConfectionFactory.php
+    - database/factories/CategorieFactory.php
+    - database/factories/FournisseurFactory.php
+    - database/factories/ArticleVenteFactory.php
+    - database/factories/ArticleFournisseurFactory.php
+    - database/factories/VenteConfectionFactory.php
+    - database/migrations/2023_08_25_131824_create_article_confections_table.php
+    - database/migrations/2023_08_25_131825_create_categories_table.php
+    - database/migrations/2023_08_25_131826_create_fournisseurs_table.php
+    - database/migrations/2023_08_25_131827_create_article_ventes_table.php
+    - database/migrations/2023_08_25_131828_create_article_fournisseurs_table.php
+    - database/migrations/2023_08_25_131829_create_vente_confections_table.php
+    - app/Models/ArticleConfection.php
+    - app/Models/Categorie.php
+    - app/Models/Fournisseur.php
+    - app/Models/ArticleVente.php
+    - app/Models/ArticleFournisseur.php
+    - app/Models/VenteConfection.php
+    - database/seeders/ArticleConfectionSeeder.php
+    - database/seeders/ArticleVenteSeeder.php
+    - database/seeders/CategorieSeeder.php
+    - database/seeders/FournisseurSeeder.php
+    - tests/Feature/Http/Controllers/ArticleConfectionControllerTest.php
+    - tests/Feature/Http/Controllers/ArticleVenteControllerTest.php
+    - tests/Feature/Http/Controllers/CategorieControllerTest.php
+    - tests/Feature/Http/Controllers/FournisseurControllerTest.php
+updated:
+    - routes/api.php
+models:
+    ArticleConfection: { libelle: string, quantiteStock: integer, prix: float, reference: string, photo: binary, categorie_id: 'id foreign:categories', relationships: { belongsTo: Categorie } }
+    Categorie: { libelle: 'string unique', type: string }
+    Fournisseur: { libelle: 'string unique' }
+    ArticleVente: { libelle: string, quantiteStock: integer, prix: float, reference: string, photo: binary, categorie_id: 'id foreign:categories', relationships: { belongsTo: Categorie } }
+    ArticleFournisseur: { fournisseur_id: 'id foreign:fournisseurs', article_confection_id: 'id foreign:article_confections', relationships: { belongsTo: 'ArticleConfection, Fournisseur' } }
+    VenteConfection: { vente_id: 'id foreign:article_ventes', article_confection_id: 'id foreign:article_confections', relationships: { belongsTo: 'ArticleConfection, ArticleVente' } }
